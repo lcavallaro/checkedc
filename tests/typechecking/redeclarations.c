@@ -460,8 +460,10 @@ int g38[];
 // interface
 int g38[] : bounds(g38, g38 + 6);  // expected-error {{conflicting bounds}}
 
-int g39[5] : itype(int checked[5]);
-int g39[5] : count(5);             // expected-error {{added bounds}}
+// These two declarations are semantically equivalent with inference of
+// bounds/itypes.
+int g39[5] : itype(int checked[5]);  // Implies count(5)
+int g39[5] : count(5);               // Implies itype(int checked[5]);
 
 //
 // Bounds declarations plus interface types
